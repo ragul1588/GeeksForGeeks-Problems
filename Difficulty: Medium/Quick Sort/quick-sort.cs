@@ -38,7 +38,7 @@ class GFG {
 class Solution {
     // Function to sort an array using quick sort algorithm.
     public void quickSort(int[] arr, int low, int high) {
-        if (low < high)
+        if (low < high) 
         {
             int pIndex = partition(arr, low, high);
             quickSort(arr, low, pIndex - 1);
@@ -48,22 +48,19 @@ class Solution {
 
     // Function to divide array into two parts and return the index.
     public int partition(int[] arr, int low, int high) {
-        int pivot = arr[low];
-        int i = low;
-        int j = high;
-    
-        while (i < j)
-        {
-            while (arr[i] <= pivot && i <= high - 1)
-            {
-                i++;
-            }
-    
-            while (arr[j] > pivot && j >= low + 1)
-            {
-                j--;
-            }
-    
+          int i = low;
+          int j = high;
+          int pivot = arr[low];
+        
+          while (i < j){
+        
+              while (arr[i] <= pivot && i<=high-1){
+                  i++;
+              }
+              while (arr[j] > pivot && j>=low + 1){
+                  j--;
+              }
+        
             if (i < j)
             {
                 int temp = arr[i];
@@ -76,7 +73,7 @@ class Solution {
         arr[low] = arr[j];
         arr[j] = temp2;
     
-        return j;
-
+        
+          return j;
     }
 }
