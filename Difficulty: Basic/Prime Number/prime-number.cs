@@ -24,7 +24,9 @@ namespace DriverCode
                 int res = obj.isPrime(N);
                 Console.Write(res);
                 Console.Write("\n");
-          }
+          
+Console.Write("~"+"\n");
+}
 
         }
     }
@@ -32,23 +34,22 @@ namespace DriverCode
 
 // } Driver Code Ends
 
+
 //User function Template for C#
 
 class Solution
 {
     //Complete this function
     //Function to check if a number is prime or not.
-    public int isPrime(int n)
+    public int isPrime(int N)
     {
-        if (n <= 1) return 0; 
-        if (n == 2) return 1; 
-        if (n % 2 == 0) return 0; 
-
-        for (int i = 3; i <= Math.Sqrt(n); i += 2)
-        {
-            if (n % i == 0) return 0;
+        if(N<=1) return 0;
+        if(N==2) return 1;
+        if(N%2==0) return 0;
+        
+        for(int i=3; i<=Math.Sqrt(N); i+=2){
+            if(N%i==0) return 0;
         }
-
         return 1;
     }
 }
