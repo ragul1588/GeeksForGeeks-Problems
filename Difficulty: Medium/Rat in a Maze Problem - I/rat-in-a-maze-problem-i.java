@@ -49,48 +49,36 @@ class Solution {
         ArrayList<String> res = new ArrayList<>();
         
         int[][] visited = new int[n][n];
+        int[] calcI = {1,0,0,-1};
+        int[] calcJ = {0,-1,1,0};
         
         if(maze[0][0]==1){
             visited[0][0] = 1;
-            solve(0,0, n, "", maze, visited, res);
+            solve(0,0, n,calcI, calcJ, "", maze, visited, res);
         }
         
         return res;
         
     }
      // Recursive backtracking function
-    public void solve(int i, int j, int n, String path, int[][] maze, int[][] visited, List<String> res) {
+    static void solve(int i, int j, int n, int[] calcI, int[] calcJ, String s, int[][] val, int[][] visited, List<String> res) {
         if (i == n - 1 && j == n - 1) {
-            res.add(path);
+            res.add(s);
             return;
         }
 
-        // Move Down
-        if (i + 1 < n && maze[i + 1][j] == 1 && visited[i + 1][j] == 0) {
-            visited[i + 1][j] = 1;
-            solve(i + 1, j, n, path + "D", maze, visited, res);
-            visited[i + 1][j] = 0;
-        }
+        String dir = "DLRU";
 
-        // Move Left
-        if (j - 1 >= 0 && maze[i][j - 1] == 1 && visited[i][j - 1] == 0) {
-            visited[i][j - 1] = 1;
-            solve(i, j - 1, n, path + "L", maze, visited, res);
-            visited[i][j - 1] = 0;
-        }
+        for (int ind = 0; ind < 4; ind++) {
+            int nextI = i + calcI[ind];
+            int nextJ = j + calcJ[ind];
 
-        // Move Right
-        if (j + 1 < n && maze[i][j + 1] == 1 && visited[i][j + 1] == 0) {
-            visited[i][j + 1] = 1;
-            solve(i, j + 1, n, path + "R", maze, visited, res);
-            visited[i][j + 1] = 0;
-        }
-
-        // Move Up
-        if (i - 1 >= 0 && maze[i - 1][j] == 1 && visited[i - 1][j] == 0) {
-            visited[i - 1][j] = 1;
-            solve(i - 1, j, n, path + "U", maze, visited, res);
-            visited[i - 1][j] = 0;
+            if (nextI >= 0 && nextI < n && nextJ >= 0 && nextJ < n
+                    && visited[nextI][nextJ] == 0 && val[nextI][nextJ] == 1) {
+                visited[nextI][nextJ] = 1;
+                solve(nextI, nextJ, n, calcI, calcJ, s + dir.charAt(ind), val, visited, res);
+                visited[nextI][nextJ] = 0;
+            }
         }
     }
 }
